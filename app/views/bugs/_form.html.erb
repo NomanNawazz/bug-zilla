@@ -1,0 +1,24 @@
+
+<%= form_with model: [project, bug], local: true do |form| %>
+    <%= form.hidden_field :user_id, :value => user %>
+    <div>
+      <%= render :partial => "layouts/form_errors", :locals => { :model => bug } %>
+    </div>
+    <div><%= form.file_field :image,   accept:  '.png,.jpg,.jpeg' %></div>
+      <br>
+    <div><%= form.text_field :title, placeholder: :title, class: "form-control" %></div>
+      <br>
+    <div><%= form.text_field :description, placeholder: :description, class: "form-control" %></div>
+      <br>
+    <% unless form_type == 'new'%><div><%= form.select :status, :collection => Bug.statuses.keys.to_a %></div><%end%>
+      <br>
+    <div><%= form.select :bug_type, :collection => Bug.bug_types.keys.to_a %></div>
+      <br>
+    <%= form.date_field :deadline %>
+      <br>
+      <br>
+    <div  class = 'd-flex justify-content-between'>
+      <%= form.submit class: "btn btn-success" %>
+      <%= link_to "Back", project_path(params[:project_id]), class: "btn btn-secondary" %>
+    </div>
+<% end %>

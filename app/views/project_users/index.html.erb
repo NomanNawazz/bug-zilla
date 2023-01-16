@@ -1,0 +1,25 @@
+  <br>
+  <h3>All Dev and SQ</h3>
+  <br>
+  <div class='float-right'>
+  </div>
+    <table class="table table-striped ">
+      <thead class="thead-dark">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    <tbody>
+    <% if @users.any? %>
+    <%= render partial: "all_users", collection: @users, as: :user %>
+    <% else %>
+      <%= render "layouts/no_record" %>
+    <% end %>
+   </tbody>
+   </table>
+   <br>
+

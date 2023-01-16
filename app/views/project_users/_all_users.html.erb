@@ -1,0 +1,9 @@
+  <% if user.role != 'manager' %>
+    <tr>
+      <td><%= user.first_name%></td>
+      <td><%= user.last_name%></td>
+      <td><%= user.email%></td>
+      <td><%= user.role%></td>
+      <td><%= button_to "ADD", project_project_users_path, method: :post, params: {user_id: user.id}, class: "btn btn-success" %> </td>
+    </tr>
+  <%end%>

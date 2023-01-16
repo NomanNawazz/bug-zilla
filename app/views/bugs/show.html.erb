@@ -1,0 +1,67 @@
+  <h3> BUG Details </h3>
+  <% if @bug.image.attached? %>
+     <%= cl_image_tag @bug.image.key, :width=>850, :height=>500 %>
+  <% end %>
+  <table class="table table-striped ">
+    <thead class="thead-dark">
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Title</td>
+        <td><%= @bug.title%></td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td><%= @bug.description%></td>
+      </tr>
+      <tr>
+        <td>Status</td>
+        <td><%= @bug.status%></td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td><%= @bug.bug_type%></td>
+      </tr>
+        <tr>
+        <td>Deadline</td>
+        <td><%= @bug.deadline%></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= link_to  "Back", project_path(params[:project_id]), class: 'btn btn-dark' %>
+    <br>
+    <br>
+  <% if current_user.developer? %>
+    <% unless current_user.bugs.exists?(@bug.id)  %>
+      <td><%= button_to "Assign to yourself" , project_bug_user_bugs_path(bug_id: @bug.id) ,  class: "btn btn-success" %></td>
+    <% end %>
+    <br>
+    <br>
+  <h4>Bugs already assiged to yourself</h4>
+  <table class="table ">
+    <thead class="thead-dark">
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Bug Type</th>
+        <th colspan = '2'>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% current_user.bugs.each do |bug| %>
+      <tr>
+        <td><%= bug.status %></td>
+        <td> <button type="button" class="btn btn-outline-success"><%= bug.status.capitalize()%></button></td>
+        <td> <button type="button" class="btn btn-outline-danger"><%= bug.bug_type.capitalize()%></button></td>
+        <td><%= button_to "Un Assign" , project_bug_user_bug_path(bug_id: bug.id), params: {bug_id: bug.id} ,method: :delete, data: { confirm: 'Are you Sure'}, class: "btn btn-danger" %></td>
+        <% if bug.status != 'resolved' %>
+          <td><%= button_to "Change Status",  project_bug_user_bug_path(bug_id: bug.id), method: :patch ,class: 'btn btn-warning' %></td>
+        <% end %>
+    <%end%>
+    </tbody>
+  </table>
+  <% end %>

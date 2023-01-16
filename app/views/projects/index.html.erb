@@ -1,0 +1,20 @@
+<h1>Projects Avaliable</h1>
+<br>
+<div class='float-right'>
+<% if current_user.role == 'manager'%>
+<%= link_to  "New Project", new_project_path, class: "btn btn-primary " %>
+<% end %>
+</div>
+<br>
+<table class="table table-striped ">
+  <thead class="thead-dark">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan='3'>Actions</th>
+     </tr>
+  </thead>
+  <tbody>
+  <%= render partial: 'all_project', collection: @projects, as: :project %>
+   </tbody>
+</table>

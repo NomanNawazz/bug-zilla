@@ -1,0 +1,9 @@
+ <h1>Edit Bug </h1>
+ <br>
+ <%= render :partial => 'form',
+     :locals => {:project => @project,
+                 :bug => @bug,
+                 :user => current_user.id ,
+                 :form_type => 'edit' } %>
+
+ <%# <%= render 'form', :project => @project, :bug => @bug, :user => current_user.id, :form_type => 'edit' %> %>

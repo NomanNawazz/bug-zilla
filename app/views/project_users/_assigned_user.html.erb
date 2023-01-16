@@ -1,0 +1,12 @@
+  <% if user.role != 'manager' %>
+    <tr>
+       <td><%= user.first_name%></td>
+       <td><%= user.last_name%></td>
+       <td><%= user.email%></td>
+       <td><%= user.role%></td>
+       <% if current_user.role == 'manager'%>
+       <td><%= button_to "Delete", project_project_user_path(project_id: params[:id]), params: {user_id: user.id} ,method: :delete, data: { confirm: 'Are you Sure'}, class: "btn btn-danger"%></td>
+       <% end %>
+    </tr>
+  <%end%>
+

@@ -1,0 +1,13 @@
+    <tr>
+      <td><%= bug.title %></td>
+      <td><button class="btn btn-outline-danger"><%= bug.status %></button></td>
+      <td><button class="btn btn-outline-success"><%= bug.bug_type %></button></td>
+      <td><%= link_to "View", project_bug_path(@project.id, bug.id), class: "btn btn-secondary" %></td>
+      <% if current_user.role == "sq" %>
+        <td><%= link_to "Edit", edit_project_bug_path(@project.id, bug.id), class: "btn btn-warning" %></td>
+        <td><%= button_to "Delete", project_bug_path(@project.id, bug.id), method: :delete, data: { confirm: "Are you Sure" }, class: "btn btn-danger" %></td>
+      <% end %>
+      <% if bug.image.attached? %>
+      <td> <%= cl_image_tag bug.image.key, :width => 200, :height => 150 %></td>
+      <% end %>
+    </tr>

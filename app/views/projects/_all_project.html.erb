@@ -1,0 +1,10 @@
+ <tr>
+      <td><%= project.title%></td>
+      <td><%= project.description%></td>
+      <td><%= link_to 'View' ,  project ,class: 'btn btn-dark' %></td>
+      <% if current_user.role == 'manager' %>
+      <td><%= link_to 'Edit' , edit_project_path(project) , class: 'btn btn-warning' %></td>
+      <td><%= link_to 'Destroy' , project, method: :delete, data: { confirm: 'Are you Sure'}, class: 'btn btn-danger' %></td>
+      <% end %>
+</tr>
+
